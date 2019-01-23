@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>お勤め先の入力</title>
+
+    <link rel="stylesheet" th:href="@{http://fonts.googleapis.com/css?family=Exo:900}"/>
+    <link rel="stylesheet"
+          th:href="@{https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+
+<nav th:insert="header.html :: header"></nav>
+
+<div class="full height image">
+    <div class="ui main container">
+        <div class="ui information container">
+            <div class="acceptance-icon" style="border:solid 3px #4B610B;" th:if="${insOrder.insuranceType.equals('treat')}">
+                <img src="/img/icon_treat.png">
+            </div>
+            <div class="acceptance-icon" style="border:solid 3px #B40404;"
+                 th:if="${insOrder.insuranceType.equals('treatLady')}">
+                <img src="/img/icon_treatLady.png">
+            </div>
+            <div class="acceptance-icon" style="border:solid 3px #0174DF;" th:if="${insOrder.insuranceType.equals('future')}">
+                <img src="/img/icon_future.png">
+            </div>
+            <div class="ui middle center aligned grid">
+                <div class="user-block">
+                    <h1 class="ui aligned header teal">お申込み情報</h1>
+
+                    <form class="ui form" method="post" action="/action/order/create">
+
+                        <div class="ui horizontal divider">お勤め先について</div>
+
+                        <div class="ui statement">
+                            ご職業が「経営・自営業」、「会社員」、「契約・派遣社員」、「公務員」、「民間団体」、「その他（有職）」の方は、以下の項目をご入力ください。
+                        </div>
+
+                        <table class="ui celled table">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <label>お勤め先名（全角）</label>
+                                </td>
+                                <td>
+                                    <p>例：ＴＩＳＣＯＮ株式会社</p>
+                                    <div class="field " th:classappend="${errors.hasError('employerName')} ? 'error'">
+                                        <input type="text" name="employerName" th:value="${form.employerName}"/>
+                                        <p th:if="${errors.hasError('employerName')}"
+                                           th:text="${errors.getMessage('employerName')}" class="error-message">
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>お勤め先郵便番号（半角）</label>
+                                </td>
+                                <td>
+                                    <p>例：123-4567</p>
+                                    <div class="field" th:classappend="${errors.hasError('employerZipCode')} ? 'error'">
+                                        <input type="text" name="employerZipCode" th:value="${form.employerZipCode}"/>
+                                        <p th:if="${errors.hasError('employerZipCode')}"
+                                           th:text="${errors.getMessage('employerZipCode')}" class="error-message">
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="white-space: nowrap;">
+                                    <label>お勤め先住所（全角）</label>
+                                </td>
+                                <td>
+                                    <p>例：東京都新宿区西新宿８－１７－１</p>
+                                    <div class="field" th:classappend="${errors.hasError('employerAddress')} ? 'error'">
+                                        <input type="text" name="employerAddress" th:value="${form.employerAddress}"/>
+                                        <p th:if="${errors.hasError('employerAddress')}"
+                                           th:text="${errors.getMessage('employerAddress')}" class="error-message">
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>お勤め先電話番号（半角）</label>
+                                </td>
+                                <td>
+                                    <p>例：00-1111-2222</p>
+                                    <div class="field"
+                                         th:classappend="${errors.hasError('employerPhoneNumber')} ? 'error'">
+                                        <input type="text" name="employerPhoneNumber"
+                                               th:value="${form.employerPhoneNumber}"/>
+                                        <p th:if="${errors.hasError('employerPhoneNumber')}"
+                                           th:text="${errors.getMessage('employerPhoneNumber')}" class="error-message">
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>業種</label>
+                                </td>
+                                <td>
+                                    <div th:each="item : ${industryTypes}" class="field"
+                                         th:classappend="${errors.hasError('industryType')} ? 'error'">
+                                        <input type="radio" name="industryType" th:value="${item.code}"
+                                               th:text="${item.label}" th:field="*{industryType}"
+                                               th:checked="${form.industryType}==${item.code}"/>
+                                    </div>
+                                    <p th:if="${errors.hasError('industryType')}"
+                                       th:text="${errors.getMessage('industryType')}" class="error-message">
+                                    </p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="ui column grid">
+                            <div class="eight wide column left aligned">
+                                <!--/*戻る場合、formの送り先を強制的に書き換える*/-->
+                                <button class="ui button angle left icon"
+                                        onclick="form.action='/action/order/backToUser';return true">戻る
+                                </button>
+                            </div>
+                            <div class="eight wide column right aligned">
+                                <button class="ui teal button angle right icon">申し込む</button>
+                            </div>
+                        </div>
+                        <input type="hidden" name="nablarch_token" th:value="${nablarch_request_token}"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

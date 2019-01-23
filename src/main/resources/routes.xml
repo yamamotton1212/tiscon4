@@ -1,0 +1,4 @@
+<routes>
+    <root to="Index#index"/>
+    <match path="/action/:controller/:action"/>
+</routes>

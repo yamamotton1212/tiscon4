@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>エラー画面</title>
+
+    <link rel="stylesheet" th:href="@{http://fonts.googleapis.com/css?family=Exo:900}"/>
+    <link rel="stylesheet"
+          th:href="@{https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+
+<nav th:insert="header.html :: header"></nav>
+
+<div class="full height image">
+    <div class="ui main container">
+        <div class="ui information container center aligned">
+            <h2 class="ui header">エラーが発生しました</h2>
+            <div class="sub header">
+                <h3>不正な画面遷移を検出したため、処理を中断しました。</h3>
+            </div>
+            <a class="ui teal button" href="/action/index" style="margin: 20px;">トップページに戻る</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
