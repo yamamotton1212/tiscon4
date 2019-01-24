@@ -67,7 +67,7 @@ IntelliJ で Mavenウィンドウ の `Execute Maven Goal` から、以下に記
     exec:java@h2-start
     ```
 
-2. DDLの生成からダンプファイル作成までを行う。
+2. db/ddl配下のDDLの実行からダンプファイル作成までを行う。
     ```sh
     -P gsp clean generate-resources
     ```
