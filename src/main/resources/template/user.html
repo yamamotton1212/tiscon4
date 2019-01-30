@@ -7,6 +7,19 @@
     <link rel="stylesheet"
           th:href="@{https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/main.css}">
+
+    <script type="text/javascript">
+    function buttonClick() {
+      var t1 =document.getElementById("textbox1");
+      var t2 = document.getElementById("textbox2");
+      t1.value = t1.value.concat(" ");
+      var cstr = t1.value.concat(t2.value);
+
+      var t3 = document.getElementById("textbox3");
+      t3.value = cstr;
+    }
+  </script>
+
 </head>
 <body>
 
@@ -44,12 +57,15 @@
                                 </td>
                                 <td>
                                     <p>例：ＴＩＳ　太郎</p>
-                                    <div class="field" th:classappend="${errors.hasError('kanjiName')} ? 'error'">
-                                        <input type="text" name="kanjiName" th:value="${form.kanjiName}"/>
-                                        <p th:if="${errors.hasError('kanjiName')}"
-                                           th:text="${errors.getMessage('kanjiName')}" class="error-message">
-                                        </p>
+                                    <div class="field" th:classappend="${errors.hasError('kanjiMyoji')} ? 'error'">
+                                        <p>苗字</p><input type="text" id = "textbox1" name="kanjiMyoji" />
+                                        <p th:if="${errors.hasError('kanjiMyoji')}" th:text="${errors.getMessage('kanjiMyoji')}" class="error-message"></p>
                                     </div>
+                                    <div class="field" th:classappend="${errors.hasError('kanjiNamae')} ? 'error'">
+                                        <p>名前</p><input type="text" id = "textbox2" name="kanjiNamae" />
+                                        <p th:if="${errors.hasError('kanjiNamae')}" th:text="${errors.getMessage('kanjiNamae')}" class="error-message"></p>
+                                    </div>
+                                    <input type ="hidden" id="textbox3" name ="kanjiName" />
                                 </td>
                             </tr>
                             <tr>
@@ -302,7 +318,7 @@
                                 </button>
                             </div>
                             <div class="eight wide column right aligned">
-                                <button class="ui teal button angle right icon">次へ（お勤め先情報の入力）</button>
+                                <button class="ui teal button angle right icon" onclick = "buttonClick();">次へ（お勤め先情報の入力）</button>
                             </div>
                         </div>
                     </form>
