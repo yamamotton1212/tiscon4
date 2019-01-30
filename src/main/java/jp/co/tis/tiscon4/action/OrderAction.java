@@ -104,7 +104,8 @@ public class OrderAction {
 
             UniversalDao.insert(insOrder);
 
-            return new HttpResponse("redirect://completed");
+//            return new HttpResponse("redirect://completed");
+            return new HttpResponse("confirmation.html");
 
         } else {
             return new HttpResponse("job.html");
