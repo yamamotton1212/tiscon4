@@ -91,6 +91,7 @@ public class UserForm implements Serializable {
     @Domain("medicalHistory")
     private String medicalHistory;
 
+
     public String getKanjiName() {
         return kanjiName;
     }
