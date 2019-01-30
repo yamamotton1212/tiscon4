@@ -98,8 +98,17 @@ public class OrderAction {
 
         ctx.setRequestScopedVar("form", new JobForm());
         ctx.setRequestScopedVar("industryTypes", IndustryType.values());
+        if (insOrder.getJob().equals("主婦") || insOrder.getJob().equals("学生") || insOrder.getJob().equals("年金受給") || insOrder.getJob().equals("他無職")) {
 
-        return new HttpResponse("job.html");
+            BeanUtil.copy(form, insOrder);
+
+            UniversalDao.insert(insOrder);
+
+            return new HttpResponse("redirect://completed");
+
+        } else {
+            return new HttpResponse("job.html");
+        }
     }
 
     /**
@@ -152,6 +161,7 @@ public class OrderAction {
         BeanUtil.copy(form, insOrder);
 
         UniversalDao.insert(insOrder);
+
 
         return new HttpResponse("redirect://completed");
     }
