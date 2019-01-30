@@ -92,7 +92,7 @@ public class OrderAction {
             throw new ApplicationException(message);
         }
 
-        UniversalDao.findAllBySqlFile(ZipcodeDto.class, "ZIPCODE_LIST");
+        //UniversalDao.findAllBySqlFile(ZipcodeDto.class, "ZIPCODE_LIST");
 
         BeanUtil.copy(form, insOrder);
 
@@ -119,6 +119,23 @@ public class OrderAction {
     }
 
     /**
+     * 登録内容確認ページを表示する。
+     *
+     * @param req リクエストコンテキスト
+     * @param ctx HTTPリクエストの処理に関連するサーバ側の情報
+     * @return HTTPレスポンス
+     */
+    @OnDoubleSubmission(path = "doubleSubmissionError.html")
+    public HttpResponse confirmation(HttpRequest req, ExecutionContext ctx) {
+
+        UserForm userform = ctx.getRequestScopedVar("userform");
+        JobForm jobform = ctx.getRequestScopedVar("jobform");
+        InsuranceOrder insOrder = SessionUtil.get(ctx, "insOrder");
+
+        return new HttpResponse("confirmation.html");
+    }
+
+    /**
      * 申し込み情報をデータベースに登録する。
      *
      * @param req リクエストコンテキスト
@@ -127,7 +144,7 @@ public class OrderAction {
      */
     @InjectForm(form = JobForm.class)
     @OnError(type = ApplicationException.class, path = "forward://inputJobForError")
-    @OnDoubleSubmission(path = "doubleSubmissionError.html")
+    //@OnDoubleSubmission(path = "doubleSubmissionError.html")
     public HttpResponse create(HttpRequest req, ExecutionContext ctx) {
         JobForm form = ctx.getRequestScopedVar("form");
         InsuranceOrder insOrder = SessionUtil.get(ctx, "insOrder");
