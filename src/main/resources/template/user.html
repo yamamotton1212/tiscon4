@@ -12,7 +12,7 @@
     function buttonClick() {
       var t1 =document.getElementById("textbox1");
       var t2 = document.getElementById("textbox2");
-      t1.value = t1.value.concat(" ");
+      t1.value = t1.value.concat("　");
       var cstr = t1.value.concat(t2.value);
 
       var t3 = document.getElementById("textbox3");
@@ -56,16 +56,18 @@
                                     <p style="color:red;">＊</p>
                                 </td>
                                 <td>
-                                    <p>例：ＴＩＳ　太郎</p>
+                                    <p>例：ＴＩＳ</p>
                                     <div class="field" th:classappend="${errors.hasError('kanjiMyoji')} ? 'error'">
                                         <p>苗字</p><input type="text" id = "textbox1" name="kanjiMyoji" />
                                         <p th:if="${errors.hasError('kanjiMyoji')}" th:text="${errors.getMessage('kanjiMyoji')}" class="error-message"></p>
                                     </div>
+                                    <p>例： 太郎</p>
                                     <div class="field" th:classappend="${errors.hasError('kanjiNamae')} ? 'error'">
                                         <p>名前</p><input type="text" id = "textbox2" name="kanjiNamae" />
                                         <p th:if="${errors.hasError('kanjiNamae')}" th:text="${errors.getMessage('kanjiNamae')}" class="error-message"></p>
                                     </div>
                                     <input type ="hidden" id="textbox3" name ="kanjiName" />
+                                    <p th:if="${errors.hasError('kanjiName')}" th:text="${errors.getMessage('kanjiName')}" class="error-message"></p>
                                 </td>
                             </tr>
                             <tr>
