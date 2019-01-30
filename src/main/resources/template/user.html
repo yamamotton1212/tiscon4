@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/main.css}">
 
     <script type="text/javascript">
-    function buttonClick() {
+    function Kanji() {
       var t1 =document.getElementById("textbox1");
       var t2 = document.getElementById("textbox2");
       t1.value = t1.value.concat("　");
@@ -18,6 +18,29 @@
       var t3 = document.getElementById("textbox3");
       t3.value = cstr;
     }
+    function Kana(){
+      var t1 =document.getElementById("kanaM");
+      var t2 = document.getElementById("kanaN");
+      t1.value = t1.value.concat("　");
+      var cstr = t1.value.concat(t2.value);
+
+      var t3 = document.getElementById("kana");
+      t3.value = cstr;
+    }
+    /**
+    function HomeCall(){
+      var t1 =document.getElementById("homecall_01");
+      var t2 = document.getElementById("homecall_02");
+      var t3 = document.getElementById("homecall_03");
+      t1.value = t1.value.concat("-");
+      t1.value = t1.value.concat(t2.value);
+      t1.value = t1.value.concat("-");
+      var cstr = v1.value.concat(t3.value);
+
+      var t4 = document.getElementById("homeNum");
+      t4.value = cstr;
+    }
+    **/
   </script>
 
 </head>
@@ -76,13 +99,18 @@
                                     <p style="color:red;">＊</p>
                                 </td>
                                 <td>
-                                    <p>例：ティーアイエス　タロウ</p>
-                                    <div class="field" th:classappend="${errors.hasError('kanaName')} ? 'error'">
-                                        <input type="text" name="kanaName" th:value="${form.kanaName}"/>
-                                        <p th:if="${errors.hasError('kanaName')}"
-                                           th:text="${errors.getMessage('kanaName')}" class="error-message">
-                                        </p>
+                                    <p>例：ティーアイエス</p>
+                                    <div class="field" th:classappend="${errors.hasError('kanaMyoji')} ? 'error'">
+                                        <input type="text" id="kanaM" name="kanaMyoji" />
+                                        <p th:if="${errors.hasError('kanaMyoji')}" th:text="${errors.getMessage('kanaMyoji')}" class="error-message"></p>
                                     </div>
+                                    <p>例：タロウ</p>
+                                    <div class="field" th:classappend="${errors.hasError('kanaNamae')} ? 'error'">
+                                        <input type="text" id="kanaN" name="kanaNamae" />
+                                        <p th:if="${errors.hasError('kanaNamae')}" th:text="${errors.getMessage('kanaNamae')}" class="error-message"></p>
+                                    </div>
+                                    <input type ="hidden" id="kana" name ="kanaName" />
+                                    <p th:if="${errors.hasError('kanaName')}" th:text="${errors.getMessage('kanaName')}" class="error-message"></p>
                                 </td>
                             </tr>
                             <tr>
@@ -176,6 +204,7 @@
                                         <p th:if="${errors.hasError('homePhoneNumber')}"
                                            th:text="${errors.getMessage('homePhoneNumber')}" class="error-message">
                                         </p>
+                                    </div>
                                     </div>
                                 </td>
                             </tr>
@@ -320,7 +349,7 @@
                                 </button>
                             </div>
                             <div class="eight wide column right aligned">
-                                <button class="ui teal button angle right icon" onclick = "buttonClick();">次へ（お勤め先情報の入力）</button>
+                                <button class="ui teal button angle right icon" onclick = "Kanji(); Kana();">次へ（お勤め先情報の入力）</button>
                             </div>
                         </div>
                     </form>
